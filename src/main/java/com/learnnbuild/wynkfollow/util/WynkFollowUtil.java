@@ -187,4 +187,13 @@ public class WynkFollowUtil {
             playListsHavingCurrentSong.remove(user.getPlaylist());
         }
     }
+
+    public void addSongsOfArtistInUserPlaylist(Artist artist, User user) {
+        Set<Song> publishedSongs = artist.getPublishedSongs();
+        for (Song song : publishedSongs) {
+            user.addSongInPlayList(song);
+            song.getPlayListsHavingCurrentSong().add(user.getPlaylist());
+            checkAndUpdateMostPopularSong(song);
+        }
+    }
 }

@@ -71,19 +71,6 @@ public class PersistenceService {
         return artist;
     }
 
-//    public UserFollowArtist getOrCreateUserFollowArtist(User user, Artist artist) {
-//        UserFollowArtist userFollowArtist = null;
-//        try {
-//            userFollowArtist = userFollowArtistRepository.findByUserIdAndArtistId(user.userId, artist.userId).orElse(null);
-//            if (userFollowArtist == null) {
-//                userFollowArtist = userFollowArtistRepository.save(new UserFollowArtist(user, artist, new Date(System.currentTimeMillis())));
-//            }
-//        } catch (Exception e) {
-//            LOGGER.error("exception occured while getting or saving userfollowartist", e);
-//        }
-//        return userFollowArtist;
-//    }
-
     public Artist getArtist(String userName) {
         Artist artist = null;
         try {

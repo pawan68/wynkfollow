@@ -1,6 +1,7 @@
 package com.learnnbuild.wynkfollow.service;
 
-import com.learnnbuild.wynkfollow.entities.*;
+import com.learnnbuild.wynkfollow.entities.Artist;
+import com.learnnbuild.wynkfollow.entities.User;
 import com.learnnbuild.wynkfollow.model.request.Follow;
 import com.learnnbuild.wynkfollow.model.response.Response;
 import com.learnnbuild.wynkfollow.util.WynkFollowUtil;
@@ -12,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class FollowService {
@@ -46,7 +46,7 @@ public class FollowService {
                 artist.addFollower(user);
                 wynkFollowUtil.checkAndUpdateMostPopularArtist(artist);
                 // now add songs of artist in user's playlist
-                addSongsOfArtistInUserPlaylist(artist, user);
+                wynkFollowUtil.addSongsOfArtistInUserPlaylist(artist, user);
                 persistenceService.saveArtist(artist);
             }
             persistenceService.saveUser(user);
@@ -57,14 +57,5 @@ public class FollowService {
         }
         response = new Response("failed", "invalid input parameter");
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
-
-    private void addSongsOfArtistInUserPlaylist(Artist artist, User user) {
-        Set<Song> publishedSongs = artist.getPublishedSongs();
-        for (Song song : publishedSongs) {
-            user.addSongInPlayList(song);
-            song.getPlayListsHavingCurrentSong().add(user.getPlaylist());
-            wynkFollowUtil.checkAndUpdateMostPopularSong(song);
-        }
     }
 }
