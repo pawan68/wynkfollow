@@ -76,6 +76,6 @@ public class UnFollowService {
             LOGGER.error("Exception occured in follow service. ", e);
         }
         response = new Response("failed", "invalid input parameter");
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }

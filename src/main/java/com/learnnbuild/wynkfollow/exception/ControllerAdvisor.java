@@ -19,6 +19,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     public ResponseEntity<ExceptionResponse> handleRunTimeException(Exception ex, WebRequest request) {
         LOGGER.error(ex.getMessage());
         ExceptionResponse exceptionBody = new ExceptionResponse("failed", "invalid input parameter");
-        return new ResponseEntity<>(exceptionBody, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionBody, HttpStatus.BAD_REQUEST);
     }
 }

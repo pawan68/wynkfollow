@@ -63,6 +63,6 @@ public class PublishService {
             LOGGER.error("Exception occured while publishing a song! ", e);
         }
         response = new Response("failed", "invalid input parameter");
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
